@@ -90,12 +90,12 @@
 
 ## 🚀 Featured Projects
 
-### 💰 [Spendsense](https://spendsense-one.netlify.app)
+### 💰 [AI Expense Tracking](https://YOUR_PRODUCTION_DOMAIN_HERE)
 **AI-Powered Expense Tracker with Gamification**
 - Progressive Web App (PWA) built with React 19 & TypeScript
 - AI-powered receipt scanning using Google Gemini
 - Smart analytics, budget management, and gamification features
-- [Live Demo](https://spendsense-one.netlify.app) | [GitHub](https://github.com/Vishwas-Chakilam/SpendSense)
+- [Live Demo](https://YOUR_PRODUCTION_DOMAIN_HERE) | [GitHub](https://github.com/YOUR_GITHUB_USERNAME/ai-expense-tracking)
 
 ---
 

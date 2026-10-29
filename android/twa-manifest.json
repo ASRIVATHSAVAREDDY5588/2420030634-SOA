@@ -1,8 +1,8 @@
 {
-  "packageId": "app.netlify.incomparable_banoffee_1d78b4.twa",
-  "host": "incomparable-banoffee-1d78b4.netlify.app/",
-  "name": "Spendsense - Expense Tracker",
-  "launcherName": "Spendsense",
+  "packageId": "com.example.aiexpensetracking",
+  "host": "YOUR_PRODUCTION_DOMAIN_HERE",
+  "name": "AI EXPENSE TRACKING",
+  "launcherName": "AI Expense",
   "display": "standalone",
   "themeColor": "#0EA5E9",
   "themeColorDark": "#000000",
@@ -13,17 +13,17 @@
   "backgroundColor": "#F9FAFB",
   "enableNotifications": true,
   "startUrl": "/",
-  "iconUrl": "https://incomparable-banoffee-1d78b4.netlify.app/web-app-manifest-512x512.png",
+  "iconUrl": "https://YOUR_PRODUCTION_DOMAIN_HERE/web-app-manifest-512x512.png",
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
     "path": "android.keystore",
-    "alias": "spendsense-key"
+    "alias": "ai-expense-tracking-key"
   },
   "appVersionName": "1",
   "appVersionCode": 1,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
-  "webManifestUrl": "https://incomparable-banoffee-1d78b4.netlify.app/manifest.webmanifest",
+  "webManifestUrl": "https://YOUR_PRODUCTION_DOMAIN_HERE/manifest.webmanifest",
   "fallbackType": "customtabs",
   "features": {
     "locationDelegation": {
@@ -36,7 +36,7 @@
   "enableSiteSettingsShortcut": true,
   "isChromeOSOnly": false,
   "isMetaQuest": false,
-  "fullScopeUrl": "https://incomparable-banoffee-1d78b4.netlify.app/",
+  "fullScopeUrl": "https://YOUR_PRODUCTION_DOMAIN_HERE/",
   "minSdkVersion": 21,
   "orientation": "portrait-primary",
   "fingerprints": [],

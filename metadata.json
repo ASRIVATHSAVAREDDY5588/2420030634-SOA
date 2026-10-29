@@ -1,5 +1,5 @@
 {
-  "name": "Spendsense",
+  "name": "AI EXPENSE TRACKING",
   "description": "A minimalist, intelligent expense tracker with local storage, gamification, and AI-powered receipt scanning.",
   "requestFramePermissions": [
     "camera"

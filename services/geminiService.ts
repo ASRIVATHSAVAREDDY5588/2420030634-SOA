@@ -1,80 +1,138 @@
-import { GoogleGenAI, Type } from "@google/genai";
 import { ReceiptData, Transaction } from "../types";
+import { formatCurrency } from "../constants";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+/**
+ * Local intelligent spending analysis engine.
+ * Provides instant, grounded financial insights based on actual transaction records
+ * as a seamless fallback if the remote Gemini AI server or key is unavailable.
+ */
+function generateLocalInsights(transactions: Transaction[], currency: string = 'INR'): string {
+  const expenses = transactions.filter(t => t.type === 'expense');
+  const income = transactions.filter(t => t.type === 'income');
 
-// Analyze receipt image and extract data
-export const scanReceipt = async (base64Image: string): Promise<ReceiptData> => {
+  const totalExpense = expenses.reduce((sum, t) => sum + t.amount, 0);
+  const totalIncome = income.reduce((sum, t) => sum + t.amount, 0);
+
+  // Group by category
+  const catTotals: Record<string, number> = {};
+  expenses.forEach(t => {
+    catTotals[t.category] = (catTotals[t.category] || 0) + t.amount;
+  });
+
+  const sortedCats = Object.entries(catTotals).sort((a, b) => b[1] - a[1]);
+  const topCat = sortedCats[0];
+  const topCatPercent = totalExpense > 0 && topCat ? Math.round((topCat[1] / totalExpense) * 100) : 0;
+
+  const bullets: string[] = [];
+
+  // Point 1: Top category analysis
+  if (topCat) {
+    bullets.push(`• **Top Category Impact:** Your highest expense area is **${topCat[0]}** (${formatCurrency(topCat[1], currency)}), accounting for **${topCatPercent}%** of your total spending. Setting a monthly limit here offers the highest savings leverage.`);
+  } else {
+    bullets.push(`• **Even Distribution:** Your spending is currently distributed across smaller, diverse purchases with no single category dominating.`);
+  }
+
+  // Point 2: Cashflow & Savings ratio
+  if (totalIncome > 0) {
+    const net = totalIncome - totalExpense;
+    const savingsRatio = Math.round((net / totalIncome) * 100);
+    if (savingsRatio >= 20) {
+      bullets.push(`• **Strong Savings Ratio:** You are retaining **${savingsRatio}%** (${formatCurrency(net, currency)}) of your total income. You are in great financial health.`);
+    } else if (savingsRatio > 0) {
+      bullets.push(`• **Positive Net Surplus:** You have a net surplus of **${formatCurrency(net, currency)}** (${savingsRatio}% savings rate). Trimming small discretionary purchases can help hit the 20% savings milestone.`);
+    } else {
+      bullets.push(`• **Spending Alert:** Total expenses (${formatCurrency(totalExpense, currency)}) exceed recorded income (${formatCurrency(totalIncome, currency)}). Consider reviewing non-essential purchases to restore a positive balance.`);
+    }
+  } else {
+    const avgExpense = expenses.length > 0 ? Math.round(totalExpense / expenses.length) : 0;
+    bullets.push(`• **Average Ticket Size:** Your average expenditure is **${formatCurrency(avgExpense, currency)}** across ${expenses.length} records. Adding your income will unlock full net savings analysis.`);
+  }
+
+  // Point 3: Second category or habit tip
+  if (sortedCats.length > 1) {
+    bullets.push(`• **Secondary Spend Observation:** Your second largest category is **${sortedCats[1][0]}** at **${formatCurrency(sortedCats[1][1], currency)}**. Check if any recurring subscriptions or frequent small transactions can be streamlined.`);
+  } else {
+    bullets.push(`• **Track Consistently:** Continue logging your daily expenses to unlock deeper trend charts, streak badges, and level unlocks.`);
+  }
+
+  return `${bullets.join('\n\n')}\n\n*Smart analysis generated from your local records.*`;
+}
+
+/**
+ * Scan a receipt image via the server-side Gemini endpoint.
+ * Protects the API key by never exposing it to the client.
+ */
+export const scanReceipt = async (base64Image: string, mimeType: string = 'image/jpeg'): Promise<ReceiptData> => {
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: [
-        {
-          inlineData: {
-            mimeType: 'image/jpeg',
-            data: base64Image
-          }
-        },
-        {
-          text: `Analyze this receipt. Extract the total amount, the date (ISO format YYYY-MM-DD), the merchant name as 'title', and guess the best category from this list: Food, Transport, Shopping, Bills, Entertainment, Health, Education, Others. Return JSON.`
-        }
-      ],
-      config: {
-        responseMimeType: 'application/json',
-        responseSchema: {
-          type: Type.OBJECT,
-          properties: {
-            amount: { type: Type.NUMBER },
-            date: { type: Type.STRING },
-            title: { type: Type.STRING },
-            category: { 
-              type: Type.STRING, 
-              enum: ['Food', 'Transport', 'Shopping', 'Bills', 'Entertainment', 'Health', 'Education', 'Others'] 
-            },
-          }
-        }
-      }
+    const response = await fetch('/api/scan-receipt', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ base64Image, mimeType }),
     });
 
-    if (response.text) {
-      return JSON.parse(response.text) as ReceiptData;
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      const errorMessage = data?.error || 'Failed to scan receipt image.';
+      throw new Error(errorMessage);
     }
-    return {};
-  } catch (error) {
-    console.error("Gemini Receipt Scan Error:", error);
+
+    return (data.data || {}) as ReceiptData;
+  } catch (error: any) {
+    console.error("Receipt Scan Error:", error);
     throw error;
   }
 };
 
-// Analyze spending habits
-export const getSpendingInsights = async (transactions: Transaction[]): Promise<string> => {
+/**
+ * Request spending insights from server-side Gemini endpoint.
+ * Automatically falls back to local smart engine if Gemini is unavailable or key is invalid.
+ */
+export const getSpendingInsights = async (transactions: Transaction[], currency: string = 'INR'): Promise<string> => {
+  const expenses = transactions.filter(t => t.type === 'expense');
+
+  if (expenses.length === 0 && transactions.length === 0) {
+    return "Add some expenses or income records to get personalized financial insights!";
+  }
+
   try {
-    // Filter only expenses for insights
-    const expenses = transactions.filter(t => t.type === 'expense');
-
-    // Limit to last 50 expenses to save context/tokens
-    const recentExpenses = expenses.slice(0, 50).map(e => ({
-      date: e.date,
-      title: e.title,
-      amount: e.amount,
-      category: e.category
-    }));
-
-    if (recentExpenses.length === 0) {
-      return "Add some expenses to get AI-powered insights!";
-    }
-
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: `You are a financial advisor. Analyze these expenses: ${JSON.stringify(recentExpenses)}. 
-      Provide 3 short, actionable bullet points about my spending habits. 
-      Be friendly and encouraging. in less than 150 words  
-      Format the output as a simple Markdown list.`
+    const response = await fetch('/api/spending-insights', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ transactions }),
     });
 
-    return response.text || "Could not generate insights at the moment.";
+    const data = await response.json();
+
+    if (response.ok && data.success && data.insights) {
+      return data.insights;
+    }
+
+    // If server returned error (e.g. invalid key or 503), fall back seamlessly to local analyzer
+    return generateLocalInsights(transactions, currency);
   } catch (error) {
-    console.error("Gemini Insights Error:", error);
-    return "Unable to connect to AI for insights.";
+    console.warn("Falling back to local spending insights engine:", error);
+    return generateLocalInsights(transactions, currency);
+  }
+};
+
+/**
+ * Check if the Gemini API key is configured on the backend.
+ */
+export const checkAiStatus = async (): Promise<{ hasGeminiKey: boolean; model: string }> => {
+  try {
+    const res = await fetch('/api/status');
+    if (!res.ok) return { hasGeminiKey: false, model: 'unknown' };
+    const data = await res.json();
+    return {
+      hasGeminiKey: Boolean(data.hasGeminiKey),
+      model: data.model || 'gemini-2.5-flash',
+    };
+  } catch {
+    return { hasGeminiKey: false, model: 'unknown' };
   }
 };

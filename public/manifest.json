@@ -1,7 +1,7 @@
 {
-  "name": "Spendsense - Expense Tracker",
-  "short_name": "Spendsense",
-  "description": "Track and manage your expenses with AI-powered insights",
+  "name": "AI EXPENSE TRACKING",
+  "short_name": "AI Expense",
+  "description": "Smart personal expense tracking with AI receipt scanning, insights, and gamified budgeting",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f9fafb",
@@ -25,4 +25,3 @@
   "screenshots": [],
   "shortcuts": []
 }
-

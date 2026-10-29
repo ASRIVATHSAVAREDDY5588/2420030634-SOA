@@ -45,11 +45,11 @@ export const CATEGORY_EMOJIS: Record<Category, string> = {
 };
 
 export const CURRENCIES = [
+  { code: 'INR', symbol: '₹', name: 'Indian Rupee' },
   { code: 'USD', symbol: '$', name: 'US Dollar' },
   { code: 'EUR', symbol: '€', name: 'Euro' },
   { code: 'GBP', symbol: '£', name: 'British Pound' },
   { code: 'JPY', symbol: '¥', name: 'Japanese Yen' },
-  { code: 'INR', symbol: '₹', name: 'Indian Rupee' },
   { code: 'CAD', symbol: 'C$', name: 'Canadian Dollar' },
   { code: 'AUD', symbol: 'A$', name: 'Australian Dollar' },
   { code: 'CNY', symbol: '¥', name: 'Chinese Yuan' },
@@ -131,21 +131,21 @@ export const formatDate = (dateStr: string) => {
   });
 };
 
-export const formatCurrency = (amount: number, currencyCode: string = 'USD') => {
+export const formatCurrency = (amount: number, currencyCode: string = 'INR') => {
+  const validAmount = typeof amount === 'number' && !isNaN(amount) ? amount : 0;
   try {
-    return new Intl.NumberFormat('en-US', {
+    const locale = currencyCode === 'INR' ? 'en-IN' : 'en-US';
+    return new Intl.NumberFormat(locale, {
       style: 'currency',
       currency: currencyCode,
-    }).format(amount);
+      maximumFractionDigits: 2,
+    }).format(validAmount);
   } catch (e) {
     // Fallback if currency code is invalid
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount);
+    return `${getCurrencySymbol(currencyCode)}${Number(validAmount).toFixed(2)}`;
   }
 };
 
-export const getCurrencySymbol = (code: string) => {
-    return CURRENCIES.find(c => c.code === code)?.symbol || '$';
+export const getCurrencySymbol = (code: string = 'INR') => {
+    return CURRENCIES.find(c => c.code === code)?.symbol || '₹';
 };

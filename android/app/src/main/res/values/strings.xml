@@ -34,7 +34,7 @@
         \"relation\": [\"delegate_permission/common.handle_all_urls\"],
         \"target\": {
             \"namespace\": \"web\",
-            \"site\": \"https://incomparable-banoffee-1d78b4.netlify.app/\"
+            \"site\": \"https://YOUR_PRODUCTION_DOMAIN_HERE/\"
         }
     }]
     

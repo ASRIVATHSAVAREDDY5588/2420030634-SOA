@@ -1,6 +1,6 @@
-# 🚀 Introducing Spendsense - Your AI-Powered Expense Tracker
+# 🚀 Introducing AI Expense Tracking - Your AI-Powered Expense Tracker
 
-I'm excited to share **Spendsense**, a modern Progressive Web App (PWA) that transforms how you track and manage your finances! 💰
+I'm excited to share **AI Expense Tracking**, a modern Progressive Web App (PWA) that transforms how you track and manage your finances! 💰
 
 ## ✨ Key Features
 
@@ -34,13 +34,13 @@ I'm excited to share **Spendsense**, a modern Progressive Web App (PWA) that tra
 
 ## 🌐 Try It Now
 
-**Live Demo:** https://spendsense-one.netlify.app
+**Live Demo:** https://YOUR_PRODUCTION_DOMAIN_HERE
 
 ## 📲 How to Install as an App
 
 ### **On Mobile (Android/iPhone):**
 
-1. Open the link in your browser: https://spendsense-one.netlify.app
+1. Open the link in your browser: https://YOUR_PRODUCTION_DOMAIN_HERE
 2. **Android (Chrome):**
    - Tap the menu (⋮) in the top right
    - Select "Install app" or "Add to Home screen"
@@ -52,7 +52,7 @@ I'm excited to share **Spendsense**, a modern Progressive Web App (PWA) that tra
 
 ### **On Desktop (Chrome/Edge):**
 
-1. Visit: https://spendsense-one.netlify.app
+1. Visit: https://YOUR_PRODUCTION_DOMAIN_HERE
 2. Look for the install icon (⊕) in the address bar
 3. Click it and select "Install"
 4. The app will open in its own window, just like a native app!

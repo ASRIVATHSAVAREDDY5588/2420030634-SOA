@@ -1,6 +1,6 @@
-# 🚀 Spendsense - AI-Powered Expense Tracker (PWA)
+# 🚀 AI Expense Tracking - AI-Powered Expense Tracker (PWA)
 
-Just launched **Spendsense** - a gamified expense tracker that makes managing finances fun! 🎮💰
+Just launched **AI Expense Tracking** - a gamified expense tracker that makes managing finances fun! 🎮💰
 
 ## What makes it special?
 
@@ -10,7 +10,7 @@ Just launched **Spendsense** - a gamified expense tracker that makes managing fi
 ✅ **Budget Tracking** - Set limits and track spending in real-time  
 ✅ **Install as App** - Works offline, no app store needed!
 
-## 🌐 Try it: https://spendsense-one.netlify.app
+## 🌐 Try it: https://YOUR_PRODUCTION_DOMAIN_HERE
 
 ## 📲 Install Instructions:
 

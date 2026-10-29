@@ -1,6 +1,6 @@
-🚀 Introducing Spendsense - Your AI-Powered Expense Tracker
+🚀 Introducing AI Expense Tracking - Your AI-Powered Expense Tracker
 
-I'm excited to share Spendsense, a modern Progressive Web App (PWA) that transforms how you track and manage your finances! 💰
+I'm excited to share AI Expense Tracking, a modern Progressive Web App (PWA) that transforms how you track and manage your finances! 💰
 
 ✨ Key Features:
 
@@ -22,12 +22,12 @@ Install directly on your phone or desktop. Works offline with local storage - no
 📤 Data Export
 Export your transactions to PDF or Excel with full control over your financial data.
 
-🌐 Try It Now: https://spendsense-one.netlify.app
+🌐 Try It Now: https://YOUR_PRODUCTION_DOMAIN_HERE
 
 📲 How to Install as an App:
 
 On Mobile (Android/iPhone):
-1. Open the link in your browser: https://spendsense-one.netlify.app
+1. Open the link in your browser: https://YOUR_PRODUCTION_DOMAIN_HERE
 2. Android (Chrome): Tap menu (⋮) → "Install app" or "Add to Home screen"
 3. iPhone (Safari): Tap Share button → "Add to Home Screen"
 
