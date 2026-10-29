@@ -1,201 +1,264 @@
-<div align="center">
-  <h1>💰 AI EXPENSE TRACKING</h1>
-  <p><strong>Personal Expense Tracker with Google Gemini AI & Gamification</strong></p>
-  <p>A fast, modern Progressive Web App (PWA) with offline support, AI-powered receipt scanning, spending insights, and local data persistence.</p>
-  
-  [![React](https://img.shields.io/badge/React-19.2.1-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
-  [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-  [![Vite](https://img.shields.io/badge/Vite-6.2-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
-  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-  [![PWA](https://img.shields.io/badge/PWA-Enabled-4285F4?style=for-the-badge&logo=pwa)](https://web.dev/progressive-web-apps/)
-  [![Google Gemini](https://img.shields.io/badge/Gemini_AI-2.5_Flash-8E75C2?style=for-the-badge&logo=google)](https://aistudio.google.com/)
-</div>
+# 💰 AI EXPENSE TRACKING (AI-Enhanced Expense Tracking System)
+
+[![React](https://img.shields.io/badge/React-19.2.1-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Google Gemini](https://img.shields.io/badge/Gemini_AI-2.5_Flash-8E75C2?style=for-the-badge&logo=google&logoColor=white)](https://aistudio.google.com/)
+[![PWA](https://img.shields.io/badge/PWA-Offline_First-4285F4?style=for-the-badge&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
+[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/ASRIVATHSAVAREDDY5588/2420030634-SOA/actions)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+
+An enterprise-grade, **Service-Oriented Architecture (SOA)** personal finance management solution engineered to combine **Local Data Sovereignty** with autonomous **Google Gemini AI** receipt perception and intelligent spending analysis.
+
+Course Project: **2420030634-SOA** | Team: **Batch 16**
 
 ---
 
-## 📌 Project Overview
+## 📑 Table of Contents
 
-**AI EXPENSE TRACKING** is a personal expense management application designed to make daily expense logging effortless, insightful, and motivating. Users can log income and expenses manually or use Google Gemini to automatically parse receipt photos. All data is securely stored locally in the browser, without requiring any external accounts, cloud databases, or bank integrations.
-
----
-
-## ✨ Features & Architecture
-
-### 🖥️ Responsive Multi-Device Interface
-- **Desktop & Tablet:** Expands into a spacious desktop environment with a dedicated sidebar navigation, quick transaction button, top header currency indicator, and multi-column grid layouts for Dashboard, Analytics, and Profile views.
-- **Mobile Experience:** Seamless bottom navigation bar, touch-friendly action buttons, and fluid modal sheets optimized for single-handed use.
-
-### 🎨 Fully Local Styling (Zero External CDN Dependency)
-- Built with Tailwind CSS and PostCSS directly in the local build pipeline.
-- Does not rely on external script CDNs (`cdn.tailwindcss.com`), ensuring offline reliability and fast rendering after installation.
-
-### 🤖 Google Gemini AI (Protected Server-Side)
-- **AI Receipt Scanning:** Upload or snap a receipt image. Gemini extracts the total amount, ISO date, merchant/title, and auto-detects the best category. The details pre-fill the transaction form so you can review, adjust, and select an account before saving (never silently saved).
-- **Spending Insights:** On demand, Gemini reviews recent expense entries and generates three short, actionable, encouraging suggestions tailored directly to your spending habits.
-- **API Key Security:** The Gemini API key is guarded entirely on the backend server (`server/geminiHandler.js` and `server.js`). It is never bundled into or accessible by client browser code. If no key is set, the rest of the application remains fully functional with helpful notices.
-- **Strict Payload Guardrails:** Base64 input size limits (12MB ceiling), whitelisted image MIME types, and transaction array bounds checks prevent server abuse.
-
-### 📊 Dashboard & Accounts
-- **Financial Balance Overview:** Instant summary cards of total balance, total income, total expenses, and budget progress formatted in **INR (₹)** by default with Indian numbering conventions (`en-IN`).
-- **Account Balances:** Keep track of where money was spent or deposited (e.g. Cash, Bank Account, Cards). *Note: These are manual categorization labels and do not connect or sync to live banks.*
-- **Recent Activity:** Quick view of recent transactions with type indicators and one-tap deletion.
-
-### 💳 Transactions Management
-- **Search & Filters:** Real-time text search across merchants, titles, categories, and notes. Filter by type (All, Income, Expense), category, or manual account label.
-- **Filtered Summary Bar:** View instant metrics for filtered records (record count, total income, total expenses, net balance).
-- **Sorting Options:** Sort transactions by date (newest/oldest) or by amount (highest/lowest).
-- **Date Grouping:** Transactions are neatly organized by day with timestamps, categories, and account tags.
-
-### 📈 Analytics & Spending Trends
-- **Time Range Views:** Switch smoothly between **Past Week (7 Days)**, **Past Month (30 Days)**, and **This Year (12 Months)**.
-- **Side-by-Side Desktop Charts:** Spending trend area chart and category breakdown donut chart displayed in an ergonomic 2-column layout on larger screens.
-- **"Analyze My Spending":** One-click button to trigger AI analysis with clear empty and error states.
-
-### 🎯 Budgets & Alerts
-- **Flexible Budget Limits:** Set weekly, monthly, or yearly overall spending goals.
-- **Category Limits:** Set individual maximums for Food, Transport, Shopping, Bills, Entertainment, Health, Education, and Others.
-- **Visual Status Bars:** Dynamic progress bars with color-coded warning states (Blue < 80%, Orange > 80%, Red > 100% Over Budget).
-
-### 🎮 Gamification & Streaks
-- **Points & Levels:** Earn points with each transaction and badge milestone.
-- **Daily Streaks:** Daily streak tracker with flame counters that reward consistency.
-- **Badges & Achievements:** Unlock Rookie Tracker, Tracker Pro, Big Spender, Super Saver, Heating Up, and On Fire.
-- **Avatar Unlocks:** Collect and switch avatars unlocked via earned points and achievement badges.
-
-### 📥 Data Export & Validated Backup / Restore
-- **PDF Export:** Formatted transaction report with financial summary and clean tables via `jspdf`.
-- **Excel Export:** Multi-sheet `.xlsx` workbook containing raw transactions and category breakdown summaries via `xlsx`.
-- **JSON Backup:** Download your complete user profile, streak data, and transaction records in standard JSON format.
-- **Validated Restore:** Pre-validates JSON backup files before importing (checks user schema, transaction array, valid dates, positive amounts). If any anomaly or corruption is detected, import is aborted and existing browser data is left untouched.
-
-### 📱 Progressive Web App (PWA) & Offline Shell
-- **Installable:** Install directly to home screen on Android, iOS, Windows, or macOS.
-- **Offline Capable:** Workbox in `vite-plugin-pwa` precaches hashed application bundles, automatically cleans up outdated cache versions, and excludes `/api/*` requests.
-- **Android TWA Materials:** Preserved configuration for Trusted Web Activity builds (`android/`) with clear placeholders for your own domain and package identifier.
+- [Problem Statement & Financial Impact](#-problem-statement--financial-impact)
+- [SOA Architecture & Service Topology](#-soa-architecture--service-topology)
+- [Core Safety & Privacy Principles](#-core-safety--privacy-principles)
+- [Key Features & Capabilities](#-key-features--capabilities)
+- [Quick Start Guide](#-quick-start-guide)
+- [REST API Reference Summary](#-rest-api-reference-summary)
+- [Automated Testing & Verification](#-automated-testing--verification)
+- [Repository Structure](#-repository-structure)
+- [Documentation Index](#-documentation-index)
+- [License](#-license)
 
 ---
 
-## 🚀 Getting Started
+## 🚨 Problem Statement & Financial Impact
+
+Modern personal expense trackers typically force users into an unacceptable compromise:
+1. **Severe Privacy & Security Risks:** Demanding credentials or continuous OAuth sync to live personal bank accounts.
+2. **Cloud Leakage of Personal Transactions:** Uploading intimate daily lifestyle purchases to third-party databases.
+3. **Manual Entry Friction:** Requiring tedious typing of merchants, amounts, and dates for every coffee or grocery receipt.
+
+> [!IMPORTANT]
+> **AI EXPENSE TRACKING** resolves this compromise through a **Service-Oriented Architecture (SOA)**. Personal financial ledgers remain 100% sovereign within the client's local datastore, while an autonomous perimeter proxy routes optical receipt scanning and grounded budgeting inquiries to **Google Gemini 2.5 Flash** without exposing API credentials or saving transactions silently.
+
+---
+
+## 🏗️ SOA Architecture & Service Topology
+
+The system is decomposed into autonomous, loosely coupled service domains conforming to enterprise SOA design principles:
+
+```mermaid
+graph TB
+    subgraph Client Application Layer
+        UI[Modern Responsive Web & PWA Shell]
+        Command[Command Palette & Keyboard Shortcut Bus]
+        SW[Service Worker: Cache-First Asset Engine]
+    end
+
+    subgraph Perimeter & API Proxy Layer
+        Server[Perimeter HTTP Server :3000<br/>Loopback Bound 127.0.0.1 & Strict CORS]
+        AuthProxy[Gemini AI Credential Guard]
+    end
+
+    subgraph Autonomous Domain Services
+        StorageSvc[STORAGE-SERVICE<br/>Local Sovereignty, Validation & Backup Guard]
+        AiScanSvc[AI-RECEIPT-SCAN-SERVICE<br/>Multimodal Vision & Schema Normalizer]
+        AnalyticsSvc[ANALYTICS-ENGINE-SERVICE<br/>Dual-mode Trends, Burn Rate & Fallback Engine]
+        ExportSvc[EXPORT-SERVICE<br/>Dynamic On-Demand PDF & Excel Generators]
+        GamifySvc[GAMIFICATION-SERVICE<br/>Streak Tracker, Quest Rules & Avatar Badges]
+        CategorySvc[CATEGORY-DETECTION-SERVICE<br/>Real-Time Keyword & Merchant Matcher]
+    end
+
+    subgraph External Intelligence Provider
+        Gemini[Google Gemini 2.5 Flash API]
+    end
+
+    UI --> SW
+    UI --> Command
+    UI --> StorageSvc
+    UI --> AnalyticsSvc
+    UI --> ExportSvc
+    UI --> GamifySvc
+    UI --> CategorySvc
+
+    UI -->|HTTP /api/*| Server
+    Server --> AuthProxy
+    AuthProxy -->|gRPC/REST with Server API Key| Gemini
+```
+
+---
+
+## 🛡️ Core Safety & Privacy Principles
+
+1. **Local Data Sovereignty:** User transactions and account logs are stored strictly inside browser `localStorage`. No cloud database ever receives personal spending records.
+2. **Zero Silent Saving Guard:** AI receipt extractions populate the review form for explicit user verification; details are **never silently saved** without confirmation.
+3. **Perimeter Credential Protection:** The Google Gemini API key resides solely on the backend server (`.env`). It is never bundled into or accessible by client browser code.
+4. **Graceful Fault Tolerance:** If external AI services are unreachable, offline, or rate-limited, the system falls back to an embedded deterministic analyzer (`services/geminiService.ts`) with zero downtime.
+5. **Atomic Backup Validation:** Restoring JSON backups validates schemas strictly before replacing state, leaving existing records untouched if validation fails.
+
+---
+
+## ✨ Key Features & Capabilities
+
+### ⚡ Power-User Productivity
+- **Command Palette (`Ctrl + K` / `⌘K`):** Universal search and command launcher inspired by Linear and Raycast. Jump to any view, search past transactions, or execute actions instantly without touching the mouse.
+- **Smart Category Auto-Detection:** Automatically classifies 100+ merchants as you type (e.g. *Starbucks* → Food, *Uber* → Transport, *Netflix* → Entertainment, *Rent* → Bills).
+- **Quick-Add Presets:** Autofocus on modal open, one-tap increment chips (`+₹50`, `+₹100`, `+₹500`, `+₹1000`), and `Ctrl + Enter` instant submission.
+- **Universal Bank CSV Importer:** Drag & drop any bank statement CSV or custom spreadsheet; parses columns and imports 50+ transactions in 1 click.
+- **Batch Operations:** Multi-select transaction checkboxes with a floating bulk action bar to select all or delete in bulk.
+
+### 🤖 Intelligent AI Assistance (Google Gemini 2.5 Flash)
+- **Multimodal Receipt Scanner:** Upload or snap a photo of any receipt; extracts merchant, date, total amount, and category with optical precision.
+- **AI Spending Coach:** Returns 3 grounded observations based directly on your recorded transactions. Includes interactive prompt chips (*Where can I cut costs?*, *Analyze Food & Dining*, *Month-End Projection*, *Savings Rate Review*).
+
+### 📊 Financial Command Center & Analytics
+- **Safe Daily Spend Allowance:** Dynamically calculates `(Remaining Budget / Days Left in Month)` (e.g. `₹450 / day`).
+- **Dual-Mode Interactive Charts:** Toggle between **Cumulative Spending Trend** and **Income vs Outflow Dual Area Chart**.
+- **Burn Rate Calculator:** Displays daily burn average, projected 30-day burn rate, and top spending areas.
+- **Multi-Account Labels:** Track spending from Cash, Bank Accounts, or Credit Cards (manual labels without bank synchronization).
+- **Gamification & Habit Building:** Level progression, daily logging streaks, avatar unlocks, and weekly quest goals.
+- **Universal Exports:** Generate and download official **Excel (.xlsx)** spreadsheets and **PDF Statement Reports** on demand.
+
+---
+
+## 🚀 Quick Start Guide
 
 ### Prerequisites
-- **Node.js**: v18.0.0 or higher (v20+ recommended)
-- **npm**: v9.0.0 or higher
-- **Google Gemini API Key**: Obtain a key from [Google AI Studio](https://aistudio.google.com/)
+- **Node.js 18+** installed ([https://nodejs.org/](https://nodejs.org/))
+- *(Optional)* Google Gemini API Key from [Google AI Studio](https://aistudio.google.com/)
 
----
+### Windows One-Click Quick Launch:
+Simply double-click:
+```cmd
+run-app.cmd
+```
+*Or via PowerShell:*
+```powershell
+.\run-app.ps1
+```
 
-### Installation & Setup
-
-1. **Navigate to the Project Directory**
-   ```bash
-   cd c:\soapro
-   ```
-
-2. **Install Dependencies**
-   ```bash
-   npm install
-   ```
-   *(On Windows PowerShell, use `npm.cmd install` if execution policies prevent running `npm.ps1`).*
-
-3. **Configure Environment Variables**
-   Copy the example environment template:
-   ```bash
-   cp .env.example .env
-   ```
-   Open `.env` and configure your settings:
-   ```env
-   GEMINI_API_KEY=your_actual_gemini_api_key_here
-   GEMINI_MODEL=gemini-2.5-flash
-   PORT=3000
-   HOST=127.0.0.1
-   ```
-   > ⚠️ **Note:** `.env` is ignored by git to protect your secrets. Never commit API keys.
-
----
-
-### Running the Application
-
-#### Production Mode (Recommended)
-1. **Build the production bundle:**
-   ```bash
-   npm run build
-   ```
-2. **Start the production server:**
-   ```bash
-   npm start
-   ```
-   - Serves the compiled production PWA assets at `http://127.0.0.1:3000` with local API endpoints for Gemini receipt scanning and insights.
-
-#### Development Mode
+### Manual Cross-Platform Launch:
 ```bash
-npm run dev
+# 1. Clone repository
+git clone https://github.com/ASRIVATHSAVAREDDY5588/2420030634-SOA.git
+cd 2420030634-SOA
+
+# 2. Configure environment (Optional: add your Gemini API key)
+cp .env.example .env
+
+# 3. Install dependencies
+npm install
+
+# 4. Build production bundle
+npm run build
+
+# 5. Start perimeter server
+node server.js
 ```
-- Starts the Vite development server with built-in API proxy middleware at `http://localhost:3000`.
+
+Open your browser to: **`http://127.0.0.1:3000`**
 
 ---
 
-## 🔑 How to Configure & Rotate Google Gemini API Key
+## 📡 REST API Reference Summary
 
-1. Visit [Google AI Studio](https://aistudio.google.com/).
-2. Sign in with your Google account and click **Get API key**.
-3. Create a key and copy the value.
-4. Paste it into your local `.env` file:
-   ```env
-   GEMINI_API_KEY=your_key_here
-   ```
-5. Restart the server (`npm start` or `node server.js`).
-6. **Key Rotation Notice:** If you ever share or suspect your API key was exposed in chat logs or public repositories, delete the key immediately in [Google AI Studio](https://aistudio.google.com/) and create a replacement key. Update `.env` with the new key.
-7. **If no API key is configured:** The application remains fully functional! Manual transaction entry, budgets, category limits, charts, exports, achievements, and backups continue to work seamlessly. Only receipt scanning and spending insights will prompt for an API key.
+| Method | Endpoint | Access Level | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/status` | Public / Local | Runtime health check, configured AI model, and API key presence. |
+| `POST` | `/api/scan-receipt` | Public / Local | Extracts transaction details from a receipt image (Base64 + MIME). |
+| `POST` | `/api/spending-insights` | Public / Local | Returns 3 personalized spending recommendations grounded in transaction logs. |
+| `GET` | `/` | Public / Local | Serves the single-page application and offline PWA application shell. |
+
+*For complete request/response schemas, JSON payloads, and error contracts, refer to [docs/API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md).*
 
 ---
 
-## 📁 Project Structure
+## 🧪 Automated Testing & Verification
+
+The project includes an automated build verification suite and live REST API contract tests:
+
+### 1. Build & Server Syntax Verification:
+```cmd
+run-tests.cmd
+```
+*Or on PowerShell / Linux:*
+```powershell
+.\run-tests.ps1
+```
+
+### 2. Live REST API Automated Verification:
+With the server running on `http://127.0.0.1:3000`:
+```cmd
+test-api.cmd
+```
+*Or via PowerShell:*
+```powershell
+.\test-api.ps1
+```
+*This script automatically verifies:*
+1. Service health check (`GET /api/status`)
+2. App shell delivery (`GET /`)
+3. Spending insights API contract validation (`POST /api/spending-insights`)
+
+---
+
+## 📂 Repository Structure
 
 ```
-c:\soapro/
-├── components/                  # Reusable UI components
-│   ├── AddTransactionModal.tsx  # Manual entry + AI receipt scan review + thumbnail
-│   ├── Icons.tsx                # SVG icon library
-│   ├── Layout.tsx               # Responsive app shell (Desktop Sidebar + Mobile Bottom Bar)
-│   └── Tour.tsx                 # Guided interactive onboarding tour
-├── services/                    # Client services
-│   ├── exportService.ts         # PDF and Excel export generators
-│   ├── geminiService.ts         # Server API client for Gemini
-│   └── storageService.ts        # Browser localStorage & validated backup/restore
-├── views/                       # Main application pages
-│   ├── Analytics.tsx            # Multi-column charts & AI spending coach
-│   ├── Dashboard.tsx            # Responsive 4-metric grid & 2-column layout
-│   ├── Onboarding.tsx           # Initial profile & avatar setup
-│   ├── Profile.tsx              # Settings, budgets, accounts, backup validation
-│   └── Transactions.tsx         # Search, filters, summary bar, sorting, deletion
-├── server/                      # Server-side handlers
-│   └── geminiHandler.js         # Gemini API calls (apiKey protected, input validation)
-├── public/                      # Static assets & PWA icons
-│   ├── logo.png
-│   ├── manifest.json
-│   └── .well-known/             # Digital Asset Links placeholder
-├── android/                     # Android TWA configuration files
-├── .env.example                 # Placeholder environment template
-├── index.html                   # HTML entry point with metadata
-├── index.css                    # Tailwind CSS definitions
-├── index.tsx                    # React DOM entry point
-├── server.js                    # Standalone production Node server (loopback bound)
-├── vite.config.ts               # Vite build config & dev API server
-└── package.json                 # Project dependencies & scripts
+2420030634-SOA/
+├── .github/
+│   └── workflows/
+│       └── ci.yml                     # GitHub Actions CI workflow
+├── docs/
+│   ├── ARCHITECTURE.md                # SOA microservice design & sequence diagrams
+│   ├── API_DOCUMENTATION.md           # Full REST API payload & status code guide
+│   └── SOA_VIVA_GUIDE.md              # 1-minute pitch script & viva Q&A
+├── components/
+│   ├── AddTransactionModal.tsx        # Fast entry modal with quick presets & OCR
+│   ├── CommandPalette.tsx             # Universal search & command launcher (Ctrl+K)
+│   ├── CsvImportModal.tsx             # Universal bank CSV & spreadsheet importer
+│   ├── Icons.tsx                      # Optimized SVG icons dictionary
+│   ├── Layout.tsx                     # Responsive app shell & desktop sidebar
+│   ├── ShortcutsModal.tsx             # Keyboard shortcuts cheat sheet
+│   └── Tour.tsx                       # New user onboarding guided tour
+├── server/
+│   └── geminiHandler.js               # Encapsulated Gemini AI handler & prompts
+├── services/
+│   ├── categoryDetector.ts            # Keyword merchant auto-categorization engine
+│   ├── exportService.ts               # Dynamic on-demand PDF & Excel export engines
+│   ├── geminiService.ts               # Client AI service & local fallback engine
+│   └── storageService.ts              # Local datastore, gamification & validation
+├── views/
+│   ├── Analytics.tsx                  # Dual-mode charts, burn rates & AI chips
+│   ├── Dashboard.tsx                  # Overview, balances, budget pace & quests
+│   ├── Onboarding.tsx                 # Profile setup & avatar selection
+│   ├── Profile.tsx                    # Budgets, accounts, badges, exports & backup
+│   └── Transactions.tsx               # Ledger, filters, batch delete & CSV tool
+├── public/                            # PWA web manifest, service worker & icons
+├── .env.example                       # Environment template (safe placeholder keys)
+├── .gitignore                         # Secret protection & build exclusions
+├── LICENSE                            # MIT License
+├── README.md                          # Repository overview & setup guide
+├── package.json                       # Dependencies & scripts
+├── run-app.cmd                        # Windows quick-launch batch script
+├── run-app.ps1                        # PowerShell quick-launch script
+├── run-tests.cmd                      # Windows test suite runner
+├── run-tests.ps1                      # PowerShell test suite runner
+├── server.js                          # Perimeter loopback server & CORS security
+├── test-api.cmd                       # Automated API verification batch script
+├── test-api.ps1                       # Automated API verification PowerShell script
+└── vite.config.ts                     # Vite build & Workbox PWA configuration
 ```
 
 ---
 
-## 🔒 Security & Privacy Architecture
+## 📖 Documentation Index
 
-- **Loopback Server Binding:** The Node.js server defaults to binding on `127.0.0.1` to prevent unwanted local network exposure.
-- **Restricted CORS Policy:** Cross-Origin Resource Sharing is locked down to known local origins (`localhost:3000`, `127.0.0.1:3000`, `localhost:5173`, `127.0.0.1:5173`).
-- **Zero Secrets in Frontend:** The Gemini API key is kept exclusively on the server side (`server.js` and `server/geminiHandler.js`). No secrets are passed to the frontend bundle or client code.
-- **Fail-Safe Backup Import:** Corrupt, tampered, or malformed backup JSON files are rejected before touching any browser storage, leaving existing user data intact.
-- **Local Data Storage:** All user transactions and profiles reside locally in the browser's `localStorage`. No cloud database or account registration is used.
-- **Informational Disclaimer:** AI observations are presented as budgeting suggestions and do not constitute financial advice.
+- 📐 **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — Architectural design, SOA service decomposition, sequence diagrams, and ER specifications.
+- 📡 **[docs/API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md)** — Detailed REST endpoint documentation with request/response schemas and cURL examples.
+- 🎓 **[docs/SOA_VIVA_GUIDE.md](docs/SOA_VIVA_GUIDE.md)** — 1-minute elevator pitch script and professor viva evaluation questions with ready-to-deliver answers.
 
 ---
 
 ## 📄 License
-MIT License.
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

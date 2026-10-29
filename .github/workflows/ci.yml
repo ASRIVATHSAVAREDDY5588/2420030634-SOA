@@ -1,0 +1,37 @@
+name: CI Build & Verification
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build Production Web App
+      run: npm run build
+
+    - name: Verify Backend Server Syntax
+      run: |
+        node -c server.js
+        node -c server/geminiHandler.js
+
+    - name: Verify Distribution Files
+      run: |
+        test -f dist/index.html
+        test -f dist/manifest.webmanifest
